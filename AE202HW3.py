@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
-import sympy as sym
+from  sympy import *
 
 #################PROBLEM 1#################
 S = 53
@@ -68,6 +68,9 @@ def maxRateOfClimb(rho):
     return maxRate
 
 #################PROBLEM 2#################
+init_printing()
+Cd_0, CL, Cd, Cl, k, CD, AR, e, pi  = symbols('C_d0 C_L C_d C_l k C_D AR e pi')
+
 
 #################PROBLEM 3#################
 rho9300 = 0.9247
