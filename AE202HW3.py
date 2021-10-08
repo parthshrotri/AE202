@@ -71,6 +71,21 @@ def maxRateOfClimb(rho):
 init_printing()
 Cd_0, CL, Cd, Cl, k, CD, AR, e, pi  = symbols('C_d0 C_L C_d C_l k C_D AR e pi')
 
+k = 1/ (pi * e * AR)
+Cd = Cd_0 + k*Cl**2
+MaxRangeRatio = Cl**(1/2) / Cd
+differentiation = diff(MaxRangeRatio, Cl)
+crit = solve(Eq(differentiation, 0))
+Cl = (AR*Cd_0*e*pi / 3)**(1/2)
+Cd = Cd = Cd_0 + k*Cl**2
+MaxRangeRatio = Cl**(1/2) / Cd
+print()
+print("Problem 2")
+MaxRangeRatio = factor(simplify(MaxRangeRatio))
+print("Before hand simplifying: " + str(MaxRangeRatio))
+# Transcribed and hand simplified due to sympy not simplifying exponent of 1.00
+MaxRangeRatio = (1/3*Cd_0*pi*e*AR)**(1/4) / (4/3*Cd_0)
+print("Simplified: " + str(MaxRangeRatio))
 
 #################PROBLEM 3#################
 rho9300 = 0.9247
