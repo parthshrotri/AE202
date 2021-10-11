@@ -76,8 +76,9 @@ Cd = Cd_0 + k*Cl**2
 MaxRangeRatio = Cl**(1/2) / Cd
 differentiation = diff(MaxRangeRatio, Cl)
 crit = solve(Eq(differentiation, 0))
+# Rearrange crit to plug into Cl
 Cl = (AR*Cd_0*e*pi / 3)**(1/2)
-Cd = Cd = Cd_0 + k*Cl**2
+Cd =  Cd_0 + k*Cl**2
 MaxRangeRatio = Cl**(1/2) / Cd
 print()
 print("Problem 2")
@@ -106,7 +107,7 @@ g = 9.81
 
 print()
 print("Probelm 3")
-VStall = (2*WNewton / (rho9300 * S * ClMax))**(1/2)
+VStall = (2*WNewton / (rho9300 * Sm2 * ClMax))**(1/2)
 print("Stall speed: " + str(VStall) + " m/s")
 VLo = 1.2*VStall
 Vavg = .7 * VLo
@@ -117,7 +118,7 @@ Davg = 1/2 * rho9300 * Vavg**2 * Sm2 * CD
 print("Lift at Vavg: " + str(Lavg) + "N")
 print("Drag at Vavg: " + str(Davg) + "N")
 
-TakeOffDistance = VLo**2 * W / (2*g*(T - (Davg + uR*(WNewton - Lavg))))
+TakeOffDistance = VLo**2 * WNewton / (2*g*(T - (Davg + uR*(WNewton - Lavg))))
 print("Takeoff distance: " + str(TakeOffDistance) + " m")
 print("Can aircraft take off? " + str(TakeOffDistance < RunwayLengthM))
 
