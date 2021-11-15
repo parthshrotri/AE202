@@ -128,10 +128,10 @@ vel = (vinf**2 + vesc**2)**(1/2)
 print("b. Velocity of " + str(vel) + "km/s")
 h = rP * vel
 e = symbols('e')
-eq = Eq(rP, h**2/(1+e*cos(0)))
+eq = Eq(rP, h**2/(muEarth/(1000**3))/(1+e*cos(0)))
 sol = solve(eq)
 e = sol[0]
-print("c. specific angular momentum: " + str(h) + " and eccentricity of " + str(e))
+print("c. specific angular momentum: " + str(h) + "km^2/s and eccentricity of " + str(e))
 print()
 
 ###################PROBLEM 4###################
