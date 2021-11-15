@@ -14,6 +14,7 @@ minAlt = 200*1000                        #meters
 maxAlt = 40000*1000                     #meters
 
 ###################PROBLEM 1###################
+print("Problem 1")
 def acceleration(dist, gravParam):
     return gravParam / (dist**2) #acceleration in m/s^2
 
@@ -47,11 +48,91 @@ plt.xlabel("Altitude (km)")
 plt.ylabel("Period (hrs)")
 plt.plot((AltitudeRange-radiusEarth)/1000 ,periodVals)
 plt.show()
-
+print()
 ###################PROBLEM 2###################
+print("Probelm 2")
+rA = 13910
+rP = 7900
 
+hp = 400
+p = 13542
 
+r = 7000
+v = 13200
+
+rVec = [-4684.5, 5088.2, 872.2]
+vVec = [4.0978, 4.5358, 4.4513]
+
+def typeOfOrbitA(apoapsis, periapsis):
+    if apoapsis == periapsis:
+        return "circular"
+    else:
+        return "elliptic"
+
+def typeOfOrbitB(periapsis, P):
+    e = symbols('e')
+    eq = Eq(periapsis*(1+e*cos(0)), P)
+    sol = solve(eq)
+    e = np.absolute(sol[0])
+    return determineOrbitType(e)
+    
+
+def typeOfOrbitC(position, velocity):
+    a, e = symbols('a e')
+    eq1 = Eq((-muEarth/(1000**3))/(2*a), (1/2)*velocity**2 - (muEarth/(1000**3)/position))
+    sol1 = solve(eq1)
+    a = sol1[0]
+    h = position*velocity
+    eq2 = Eq(h**2/(muEarth/(1000**3)), a*(1-e**2))
+    sol2 = solve(eq2)
+    e = np.absolute(sol2[0])
+    return determineOrbitType(e)
+
+def typeOfOrbitD(position, velocity):
+    rMag = (position[0]**2 + position[1]**2 + position[2]**2)**(1/2)
+    vMag = (velocity[0]**2 + velocity[1]**2 + velocity[2]**2)**(1/2)
+    a, e = symbols('a e')
+    eq1 = Eq((-muEarth/(1000**3))/(2*a), (1/2)*vMag**2 - (muEarth/(1000**3)/rMag))
+    sol1 = solve(eq1)
+    a = sol1[0]
+    h = rMag*vMag
+    eq2 = Eq(h**2/(muEarth/(1000**3)), a*(1-e**2))
+    sol2 = solve(eq2)
+    e = np.absolute(sol2[0])
+    return determineOrbitType(e)
+
+def determineOrbitType(e):
+    if e==0 :
+        return "circular"
+    elif 0<e and e<1:
+        return "elliptic"
+    elif e == 1:
+        return "parabolic"
+    else:
+        return "hyperbolic"
+
+print("a. " + typeOfOrbitA(rA, rP))
+print("b. " + typeOfOrbitB(hp, p))
+print("c. " + typeOfOrbitC(r, v))
+print("d. " + typeOfOrbitD(rVec, vVec))
+print()
 ###################PROBLEM 3###################
+print("Probelm 3")
+alt = 400
+rP = alt + radiusEarth / 1000
+vP = ((muEarth/(1000**3))/rP)
+print("a. Periapsis altitude is " + str(rP) + "km and velocity is " + str(vP) + "km/s")
+vesc = ((2*muEarth/(1000**3))/rP)**(1/2)
+vinf = 1.5
+vel = (vinf**2 + vesc**2)**(1/2)
+print("b. Velocity of " + str(vel) + "km/s")
+h = rP * vel
+e = symbols('e')
+eq = Eq(rP, h**2/(1+e*cos(0)))
+sol = solve(eq)
+e = sol[0]
+print("c. specific angular momentum: " + str(h) + " and eccentricity of " + str(e))
+print()
 
 ###################PROBLEM 4###################
 
