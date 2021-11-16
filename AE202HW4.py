@@ -71,7 +71,7 @@ def typeOfOrbitA(apoapsis, periapsis):
 
 def typeOfOrbitB(periapsis, P):
     e = symbols('e')
-    eq = Eq(periapsis*(1+e*cos(0)), P)
+    eq = Eq((periapsis+radiusEarth/1000)*(1+e), P)
     sol = solve(eq)
     e = np.absolute(sol[0])
     return determineOrbitType(e)
@@ -102,9 +102,9 @@ def typeOfOrbitD(position, velocity):
     return determineOrbitType(e)
 
 def determineOrbitType(e):
-    if e==0 :
+    if e<=.001 :
         return "circular"
-    elif 0<e and e<1:
+    elif .001<e and e<1:
         return "elliptic"
     elif e == 1:
         return "parabolic"
@@ -121,7 +121,7 @@ print("Probelm 3")
 alt = 400
 rP = alt + radiusEarth / 1000
 vP = ((muEarth/(1000**3))/rP)
-print("a. Periapsis altitude is " + str(rP) + "km and velocity is " + str(vP) + "km/s")
+print("a. Periapsis altitude is " + str(alt) + "km and velocity is " + str(vP) + "km/s")
 vesc = ((2*muEarth/(1000**3))/rP)**(1/2)
 vinf = 1.5
 vel = (vinf**2 + vesc**2)**(1/2)
