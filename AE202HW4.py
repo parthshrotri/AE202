@@ -135,5 +135,22 @@ print("c. specific angular momentum: " + str(h) + "km^2/s and eccentricity of " 
 print()
 
 ###################PROBLEM 4###################
+print("Probelm 4")
+apoapsis = 6300
+periapsis = 5000
+muMars = 42828.372
 
+a = (apoapsis + periapsis)/2
+e = (apoapsis - periapsis) / (apoapsis + periapsis)
+
+period = 2*np.pi/np.sqrt(muMars) * a**(3/2)
+n = 2*np.pi / period
+M = n * (3*60+12)
+E, nu = symbols('E nu')
+eq1 = Eq(M, E-e*sin(E))
+E = .10569823335944637 #solved using graphing calculator as sympy solver could not solve
+eq2 = Eq(tan(E/2), tan(nu/2)*sqrt((1-e)/(1+e)))
+sol2 = solve(eq2)
+nu = sol2[0]
+print("True anomaly is " + str(nu) + " radians")
 ###################PROBLEM 5###################
