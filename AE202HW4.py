@@ -120,7 +120,7 @@ print()
 print("Probelm 3")
 alt = 400
 rP = alt + radiusEarth / 1000
-vP = ((muEarth/(1000**3))/rP)
+vP = ((muEarth/(1000**3))/rP)**(1/2)
 print("a. Periapsis altitude is " + str(alt) + "km and velocity is " + str(vP) + "km/s")
 vesc = ((2*muEarth/(1000**3))/rP)**(1/2)
 vinf = 1.5
